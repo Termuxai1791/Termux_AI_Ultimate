@@ -1,5 +1,5 @@
 import os
-from openai import OpenAI
+import openai
 from rich.console import Console
 
 console = Console()
@@ -12,7 +12,7 @@ if not key:
     console.print('export OPENAI_API_KEY="your_key_here"\n')
     exit()
 
-client = OpenAI(api_key=key)
+openai.api_key = key
 
 console.print("\n🌍 Online AI Chat started (type exit to quit)\n")
 
@@ -22,12 +22,11 @@ while True:
     if user.lower() in ["exit", "quit"]:
         break
 
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": user}]
     )
 
     console.print("\nAI >", style="bold yellow")
-    console.print(response.choices[0].message.content)
+    console.print(response["choices"][0]["message"]["content"])
     console.print("")
-
