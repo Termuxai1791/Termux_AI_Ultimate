@@ -8,8 +8,8 @@ pkg upgrade -y
 
 pkg install python git wget unzip -y
 
-pip install --upgrade pip
-pip install openai rich
+pip install openai==0.28.1 rich
+
 
 echo "📂 AI parancs létrehozása..."
 
